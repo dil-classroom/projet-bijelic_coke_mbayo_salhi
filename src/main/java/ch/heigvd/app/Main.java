@@ -10,7 +10,8 @@ import java.util.concurrent.Callable;
         mixinStandardHelpOptions = true,
         version = "static 0.1",
         description = "Generate random static websites",
-        subcommands = {New.class, Clean.class, Build.class, Serve.class})
+        subcommands = {New.class, Clean.class, Build.class, Serve.class,
+                Init.class})
 public class Main implements Callable<Integer>
 {
     @Override

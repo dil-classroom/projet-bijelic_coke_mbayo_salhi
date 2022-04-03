@@ -77,4 +77,44 @@ public class MainTest
             System.out.println(e.getMessage());
         }
     }
+
+    @Test
+    // Test that the init command init a directory with config files
+    public void statiqueInitShouldInitADirectory() {
+        // run the command
+        Main app = new Main();
+        StringWriter sw = new StringWriter();
+        CommandLine cmd = new CommandLine(app);
+        cmd.setOut(new PrintWriter(sw));
+
+        File path = new File("monTEST/siteTEST/");
+        File root = new File("monTEST/");
+
+        // check that the test directory doesn't exist
+        assertFalse("Test directory already exists",
+                Files.exists(root.toPath()));
+
+        int exitCode = cmd.execute("init", path.toString());
+        assertEquals(0, exitCode);
+
+        // check that config.json exists
+        // check that index.md exists
+
+        String dirName = "monTEST/siteTEST/";
+        String confFile = "config.json";
+        String indexFile = "index.md";
+
+        assertTrue(Files.exists(new File((dirName + confFile)).toPath()));
+        assertTrue(Files.exists(new File((dirName + indexFile)).toPath()));
+
+        // Delete the test directory
+        File pathToTestDir =
+                new File(System.getProperty("user" + ".dir") + "/monTEST");
+        try {
+            FileUtils.deleteDirectory(pathToTestDir);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

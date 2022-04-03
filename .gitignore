@@ -5,6 +5,7 @@ target/
 .idea/*
 !.idea/runConfigurations/
 
+*.iml
 
 pom.xml.tag
 pom.xml.releaseBackup
