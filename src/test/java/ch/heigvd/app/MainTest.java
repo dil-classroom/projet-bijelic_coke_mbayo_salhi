@@ -117,4 +117,13 @@ public class MainTest
             System.out.println(e.getMessage());
         }
     }
+
+    @Test
+    /**
+     * Test the "static -V" command
+     */
+    public void staticVersionShouldExitWithZero() {
+        int exitCode = new CommandLine(new Main()).execute("-V");
+        assertEquals(0, exitCode);
+    }
 }
