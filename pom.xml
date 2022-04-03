@@ -32,5 +32,52 @@
       <artifactId>commons-io</artifactId>
       <version>2.11.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.diffplug.spotless</groupId>
+      <artifactId>spotless-maven-plugin</artifactId>
+      <version>2.22.0</version>
+    </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.22.0</version>
+        <configuration>
+          <java>
+            <!-- These are the defaults, you can override if you want -->
+            <includes>
+              <include>src/main/java/**/*.java</include>
+              <include>src/test/java/**/*.java</include>
+            </includes>
+
+            <importOrder /> <!-- standard import order -->
+            <importOrder>  <!-- or a custom ordering -->
+              <wildcardsLast>false</wildcardsLast> <!-- Optional, default false. Sort wildcard import after specific imports -->
+              <order>java,javax,org,com,com.diffplug,,\\#com.diffplug,\\#</order>  <!-- or use <file>${project.basedir}/eclipse.importorder</file> -->
+              <!-- you can use an empty string for all the imports you didn't specify explicitly, and '\\#` prefix for static imports. -->
+            </importOrder>
+
+            <removeUnusedImports /> <!-- self-explanatory -->
+
+            <googleJavaFormat>
+              <version>1.8</version>                      <!-- optional -->
+              <style>GOOGLE</style>                       <!-- or AOSP (optional) -->
+              <reflowLongStrings>true</reflowLongStrings> <!-- optional (requires at least 1.8) -->
+              <!-- optional: custom group artifact (you probably don't need this) -->
+              <groupArtifact>com.google.googlejavaformat:google-java-format</groupArtifact>
+            </googleJavaFormat>
+            <eclipse />          <!-- has its own section below -->
+            <prettier />         <!-- has its own section below -->
+
+            <licenseHeader>
+              <content>/* (C)$YEAR */</content>  <!-- or <file>${project.basedir}/license-header</file> -->
+            </licenseHeader>
+          </java>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
